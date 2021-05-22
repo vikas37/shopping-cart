@@ -1,0 +1,50 @@
+<%- include("../partials/header") %> <%- include("../partials/navbar") %>
+
+<div class="container mt-5">
+  <%- include("../partials/flash") %>
+
+  <h6 class="display-6">My Cart</h6>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <% for(let item of userCart){ %>
+
+      <div class="card mb-3" style="width: 90%">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img style="width: 200px" src="<%= item.img %> " alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= item.name %></h5>
+              <h6 class="card-text"> &#8377; <%= item.price %> </h6>
+              
+              <form action="/user/<%=currentUser._id%>/cart/<%=item._id%>?_method=DELETE" method="post">
+                <button class="btn btn-sm btn-danger">remove</button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <div class="col-lg-4 mb-2">
+      <% totalAmount = 0 %> 
+      <h6 class="display-6">Products:</h6>
+      <ul class="list-group"></ul>
+        <% for(let item of userCart){ %>
+          <li class="list-group-item"><%= item.name %> - <strong>&#8377; <%= item.price %></strong> </li>
+          <% totalAmount += item.price %> 
+        <% } %>  
+      </ul>
+      <div class="mt-3">
+        <p class="fw-bold"> Total Amount: &#8377; <%= totalAmount %> </p>
+        <a href="/cart/payment" class="btn btn-success">Proceed to Pay</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

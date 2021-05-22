@@ -1,0 +1,4 @@
+1. implement playment gateway
+2. add images using multer to cloudnary
+3. make user profile feature
+4. use icon for website
